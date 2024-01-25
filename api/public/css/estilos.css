@@ -1,0 +1,31 @@
+:root {
+   --color-primario: #b64825;
+   --color-secundario: #1d0e13;
+   --color-terciario: #6c757d;
+}
+
+.btn-primary {
+   background-color: var(--color-primario);
+   border-color: var(--color-primario);
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover {
+   background-color: #a63e1f !important;
+   border-color: #a63e1f !important;
+   box-shadow: 0 0 0 0.2rem rgba(29, 14, 19, 0.25);
+}
+
+.form-control:focus,
+.form-control:active,
+.form-control:hover {
+   border-color: var(--color-secundario);
+   box-shadow: 0 0 0 0.2rem rgba(29, 14, 19, 0.25);
+}
+
+.text-primary {
+   color: var(--color-primario) !important;
+   text-decoration: none;
+   cursor: pointer;
+}

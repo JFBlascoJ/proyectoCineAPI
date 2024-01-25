@@ -1,0 +1,18 @@
+{
+    "name": "vespertino/api",
+    "description": "API REST para LogroFilm",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vespertino\\Api\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "José Francisco Blasco",
+            "email": "jfblascoj@gmail.com"
+        }
+    ]
+}
