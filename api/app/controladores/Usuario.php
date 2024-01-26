@@ -7,7 +7,6 @@ class Usuario extends Controlador
     {
     }
 
-    // METODOS PUBLICOS
     public function index()
     {
         $token = new Token();
@@ -55,10 +54,6 @@ class Usuario extends Controlador
     public function registro()
     {
         $usuarioModelo = $this->modelo('UsuarioModelo');
-
-        // Coger datos del body
-        // $json = file_get_contents('php://input');
-        // $data = json_decode($json);
         $data = $_POST;
 
         if ($data === 'null') {
@@ -66,12 +61,6 @@ class Usuario extends Controlador
             echo json_encode(['mensaje' => 'Faltan datos para insertar el usuario']);
             return;
         }
-
-        // if (!isset($data->correo) || !isset($data->username) || !isset($data->clave) || !isset($data->nombre) || !isset($data->apellidos)) {
-        //     header('Content-Type: application/json', true, 400);
-        //     echo json_encode(['mensaje' => 'Faltan datos para insertar el usuario']);
-        //     return;
-        // }
 
         if (!isset($data["foto"])) {
             $data["foto"] = null;
@@ -179,7 +168,6 @@ class Usuario extends Controlador
         $this->getUsuarioByUsername($username);
     }
 
-    // METODOS PRIVADOS
     private function addUsuario()
     {
         $usuarioModelo = $this->modelo('UsuarioModelo');
@@ -197,12 +185,6 @@ class Usuario extends Controlador
             echo json_encode(['mensaje' => 'Las contrseñas no coinciden']);
 
         }
-
-        // if (!isset($data->correo) || !isset($data->username) || !isset($data->nombre) || !isset($data->apellidos)) {
-        //     header('Content-Type: application/json', true, 400);
-        //     echo json_encode(['mensaje' => 'Faltan datos para insertar el usuario']);
-        //     return;
-        // }
 
         if (!isset($data["foto"])) {
             $data["foto"] = null;
@@ -297,7 +279,6 @@ class Usuario extends Controlador
     {
         $usuarioModelo = $this->modelo('UsuarioModelo');
 
-        // Coger datos del body
         $json = file_get_contents('php://input');
         parse_str($json, $data);
         $id = intval($data["id_usr"]);

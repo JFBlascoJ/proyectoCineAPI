@@ -10,7 +10,6 @@ class Valoracion extends Controlador
         }
     }
 
-    // METODOS PUBLICOS
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -149,11 +148,6 @@ class Valoracion extends Controlador
         $valoracionModelo = $this->modelo('ValoracionModelo');
         $json = file_get_contents('php://input');
         $datos = json_decode($json);
-        // if (!$this->isValidValoracion($datos)) {
-        //     header('Content-Type: application/json', true, 400);
-        //     echo json_encode(['mensaje' => 'Datos incompletos']);
-        //     return;
-        // }
         if (!$valoracionModelo->getValoracionById($datos->id_valoracion)) {
             header('Content-Type: application/json', true, 400);
             echo json_encode(['mensaje' => 'Valoracion no encontrada']);
@@ -183,8 +177,6 @@ class Valoracion extends Controlador
         echo json_encode(['mensaje' => 'Valoracion eliminada']);
     }
 
-
-    // METODOS PRIVADOS 
     private function getValoraciones()
     {
         $valoracionModelo = $this->modelo('ValoracionModelo');

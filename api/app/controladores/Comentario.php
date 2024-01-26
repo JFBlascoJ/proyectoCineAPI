@@ -10,8 +10,6 @@ class Comentario extends Controlador
             exit;
         }
     }
-
-    // METODOS PUBLICOS
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

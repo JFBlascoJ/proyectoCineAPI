@@ -11,7 +11,6 @@ class Pelicula extends Controlador
         }
     }
 
-    // METODOS PUBLICOS
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -135,13 +134,6 @@ class Pelicula extends Controlador
         $peliculaModelo = $this->modelo('PeliculaModelo');
         $datos = $_POST;
 
-        // if (!$this->isPeliculaValid($datos)) {
-        //     header('Content-Type: application/json', true, 400);
-        //     echo json_encode(['mensaje' => 'Faltan datos para insertar la pelicula']);
-        //     return;
-        // }
-
-
         $peli = $peliculaModelo->addPelicula($datos);
         header('Content-Type: application/json', true, 201);
         echo json_encode($peli);
@@ -207,45 +199,9 @@ class Pelicula extends Controlador
         return;
     }
 
-    // private function updatePelicula()
-    // {
-    //     $peliculaModelo = $this->modelo('PeliculaModelo');
-
-    //     // Coger datos del body
-    //     $json = file_get_contents('php://input');
-    //     $data = json_decode($json);
-    //     $id = $data->id_peli;
-    //     unset($data->id_peli);
-
-    //     if ($data === 'null') {
-    //         header('Content-Type: application/json', true, 400);
-    //         echo json_encode(['mensaje' => 'Faltan datos para actualizar la pelicula']);
-    //         return;
-    //     }
-
-    //     if (!isset($id)) {
-    //         header('Content-Type: application/json', true, 400);
-    //         echo json_encode(['mensaje' => 'Faltan datos para actualizar la pelicula']);
-    //         return;
-    //     }
-
-    //     if (!$this->isPeliculaValid($data)) {
-    //         header('Content-Type: application/json', true, 400);
-    //         echo json_encode(['mensaje' => 'Faltan datos para actualizar la pelicula']);
-    //         return;
-    //     }
-
-    //     // $resul = $peliculaModelo->updatePelicula($id, $data);
-    //     // header('Content-Type: application/json', true, 400);
-    //     // echo json_encode(['mensaje' => $resul]);
-    //     $peliculaModelo->updatePelicula($id, $data);
-    // }
-
     private function updatePelicula()
     {
         $peliculaModelo = $this->modelo('PeliculaModelo');
-
-        // Coger datos del body
         $json = file_get_contents('php://input');
         parse_str($json, $data);
         $id = intval($data["id_peli"]);
@@ -262,10 +218,7 @@ class Pelicula extends Controlador
             echo json_encode(['mensaje' => 'Faltan datos para actualizar la pelicula']);
             return;
         }
-
-        // $resul = $peliculaModelo->updatePelicula($id, $data);
-        // header('Content-Type: application/json', true, 400);
-        // echo json_encode(['mensaje' => $resul]);
+        
         $resul = $peliculaModelo->updatePelicula($id, $data);
 
         if ($resul) {

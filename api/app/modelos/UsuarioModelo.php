@@ -113,7 +113,6 @@ class UsuarioModelo
                 $condiciones[] = "$clave LIKE :$clave";
             }
 
-            // Agregar parámetros para otros campos
             $parametros[":$clave"] = $clave === "es_admin" ? $valor : "%$valor%";
         }
 
@@ -121,12 +120,10 @@ class UsuarioModelo
 
         $this->bd->query($sql);
 
-        // Vincular cada valor
         foreach ($parametros as $param => $val) {
             $this->bd->bind($param, $val);
         }
 
-        // Ejecutar y retornar los resultados
         return $this->bd->registros();
     }
 

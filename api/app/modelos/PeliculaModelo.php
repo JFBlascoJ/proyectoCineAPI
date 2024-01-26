@@ -27,11 +27,6 @@ class PeliculaModelo
 
     public function getAllPeliculas()
     {
-        // $this->bd->query('SELECT * FROM peliculas');
-        // $this->bd->query('SELECT peliculas.*, COUNT(comentarios.id_peli) as comentarios 
-        // FROM peliculas 
-        // LEFT JOIN comentarios ON peliculas.id_peli = comentarios.id_peli
-        // GROUP BY peliculas.id_peli');
         $this->bd->query('SELECT peliculas.*, 
         COUNT(comentarios.id_peli) as comentarios, 
         COALESCE(ROUND(AVG(valoraciones.valoracion) / 2, 1), 0) AS valoracion
@@ -110,25 +105,6 @@ class PeliculaModelo
 
         return $this->bd->execute();
     }
-
-    // public function updatePelicula($id, $datos)
-    // {
-    //     $columnas = array_keys((array) $datos);
-    //     $setear = "";
-
-    //     for ($i = 0; $i < count($columnas); $i++) {
-    //         $setear .= $i < count($columnas) - 1 ? $columnas[$i] . " = :" . $columnas[$i] . ", " : $columnas[$i] . " = :" . $columnas[$i];
-    //     }
-
-    //     $this->bd->query("UPDATE peliculas SET " . $setear . " WHERE id_peli = :id_peli");
-
-    //     foreach ($datos as $key => $value) {
-    //         $this->bd->bind(":" . $key, $value);
-    //     }
-    //     $this->bd->bind(":id_peli", $id);
-
-    //     return $this->bd->execute();
-    // }
     public function deletePelicula($id)
     {
         $this->bd->query('DELETE FROM peliculas WHERE id_peli = :id_peli');
@@ -185,7 +161,6 @@ class PeliculaModelo
 
         $sql = 'SELECT * FROM peliculas WHERE ' . implode(' AND ', $condiciones);
 
-        // Ejecutar la consulta
         $this->bd->query($sql);
         return $this->bd->registros();
     }
@@ -200,14 +175,12 @@ class PeliculaModelo
     }
 
     public function getTop10() {
-        $mysqli = new mysqli("localhost", "root", "", "logrofilm"); // Reemplaza con tus propios datos de conexión
-        
-        // Verificar la conexión
+        $mysqli = new mysqli("localhost", "root", "", "logrofilm");
+
         if ($mysqli->connect_error) {
             die("Error de conexión a la base de datos: " . $mysqli->connect_error);
-        }
+        }        
         
-        // Consulta SQL
         $sql = "SELECT 
                     p.id_peli,
                     p.tit_espanol,
